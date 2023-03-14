@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.cliente.ws.wsrasmooplus.exception.NotFoundException;
 import com.cliente.ws.wsrasmooplus.model.SubscriptionType;
 import com.cliente.ws.wsrasmooplus.repository.SubscriptionTypeRepository;
 import com.cliente.ws.wsrasmooplus.service.SubscriptionTypeService;
@@ -30,7 +31,7 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
         if (subscriptionType.isPresent()){
             return subscriptionType.get();
         }
-        return null;
+        throw new NotFoundException("SubscriptionType não encontrado!");
     }
 
     @Override

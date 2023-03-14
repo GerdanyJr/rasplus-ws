@@ -1,7 +1,5 @@
 package com.cliente.ws.wsrasmooplus.controller;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,10 +30,6 @@ public class SusbcriptionTypeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SubscriptionType> findAll(@PathVariable Long id){
-        SubscriptionType subscriptionType = subscriptionTypeService.findById(id);
-        if(Objects.nonNull(subscriptionType)){
-            return ResponseEntity.status(HttpStatus.OK).body(subscriptionType);
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.findById(id));
     }
 }
