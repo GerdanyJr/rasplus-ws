@@ -7,5 +7,4 @@ import com.cliente.ws.wsrasmooplus.model.SubscriptionType;
 
 @Repository
 public interface SubscriptionTypeRepository extends JpaRepository<SubscriptionType,Long> {
-    
 }
