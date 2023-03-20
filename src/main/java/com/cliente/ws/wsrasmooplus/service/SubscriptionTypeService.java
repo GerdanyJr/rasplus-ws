@@ -3,6 +3,7 @@ package com.cliente.ws.wsrasmooplus.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.cliente.ws.wsrasmooplus.dto.SubscriptionTypeDto;
 import com.cliente.ws.wsrasmooplus.model.SubscriptionType;
 
 public interface SubscriptionTypeService {
@@ -11,9 +12,9 @@ public interface SubscriptionTypeService {
 
     SubscriptionType findById(long id);
 
-    SubscriptionType create(SubscriptionType subscriptionType);
+    SubscriptionType create(SubscriptionTypeDto subscriptionType);
 
-    SubscriptionType update(SubscriptionType subscriptionType);
+    SubscriptionType update(SubscriptionTypeDto subscriptionType);
 
     void delete(Long id);
 }

@@ -9,13 +9,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 
+@Builder
 @Table(name = "subscriptions_type")
 @Entity
 public class SubscriptionType implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subscriptions_type_id")
     private Long id;
 
@@ -26,7 +28,7 @@ public class SubscriptionType implements Serializable {
 
     private BigDecimal price;
 
-    @Column(name = "product_key")
+    @Column(name = "product_key",unique = true)
     private String productKey;
 
     public SubscriptionType(Long id, String name, Long accessMonth, BigDecimal price, String productKey) {

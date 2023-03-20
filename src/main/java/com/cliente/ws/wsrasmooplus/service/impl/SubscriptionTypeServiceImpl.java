@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.cliente.ws.wsrasmooplus.dto.SubscriptionTypeDto;
 import com.cliente.ws.wsrasmooplus.exception.NotFoundException;
 import com.cliente.ws.wsrasmooplus.model.SubscriptionType;
 import com.cliente.ws.wsrasmooplus.repository.SubscriptionTypeRepository;
@@ -14,7 +15,7 @@ import com.cliente.ws.wsrasmooplus.service.SubscriptionTypeService;
 @Service
 public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
 
-    private SubscriptionTypeRepository subscriptionTypeRepository;
+    private final SubscriptionTypeRepository subscriptionTypeRepository;
 
     SubscriptionTypeServiceImpl(SubscriptionTypeRepository subscriptionTypeRepository){
         this.subscriptionTypeRepository = subscriptionTypeRepository;
@@ -35,13 +36,18 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     }
 
     @Override
-    public SubscriptionType create(SubscriptionType subscriptionType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+    public SubscriptionType create(SubscriptionTypeDto dto) {
+        return subscriptionTypeRepository.save(SubscriptionType.builder()
+        .id(dto.getId())
+        .name(dto.getName())
+        .accessMonth(dto.getAcessMonth())
+        .price(dto.getPrice())
+        .productKey(dto.getProductKey())
+        .build());
     }
 
     @Override
-    public SubscriptionType update(SubscriptionType subscriptionType) {
+    public SubscriptionType update(SubscriptionTypeDto subscriptionType) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
