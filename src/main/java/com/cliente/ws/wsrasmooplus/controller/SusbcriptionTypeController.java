@@ -36,7 +36,7 @@ public class SusbcriptionTypeController {
             return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.findById(id));
     }
 
-    @PostMapping("/1")
+    @PostMapping
     public ResponseEntity<SubscriptionType> create(@RequestBody SubscriptionTypeDto subscriptionTypeDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(subscriptionTypeService.create(subscriptionTypeDto));
     }
