@@ -61,8 +61,8 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        getSubscriptiontype(id);
+        subscriptionTypeRepository.deleteById(id);
     }
 
     private SubscriptionType getSubscriptiontype(Long id){
