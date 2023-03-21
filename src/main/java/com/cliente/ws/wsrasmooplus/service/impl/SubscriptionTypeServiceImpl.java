@@ -30,11 +30,7 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
 
     @Override
     public SubscriptionType findById(long id) {
-        Optional<SubscriptionType> subscriptionType = subscriptionTypeRepository.findById(id);
-        if (subscriptionType.isPresent()) {
-            return subscriptionType.get();
-        }
-        throw new NotFoundException("SubscriptionType não encontrado!");
+        return getSubscriptiontype(id);
     }
 
     @Override
@@ -52,9 +48,15 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     }
 
     @Override
-    public SubscriptionType update(SubscriptionTypeDto subscriptionType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public SubscriptionType update(Long id,SubscriptionTypeDto dto) {
+        getSubscriptiontype(id);
+        return subscriptionTypeRepository.save(SubscriptionType.builder()
+                .id(id)
+                .name(dto.getName())
+                .accessMonth(dto.getAcessMonth())
+                .price(dto.getPrice())
+                .productKey(dto.getProductKey())
+                .build());
     }
 
     @Override
@@ -63,4 +65,11 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
+    private SubscriptionType getSubscriptiontype(Long id){
+        Optional<SubscriptionType> subscriptionType = subscriptionTypeRepository.findById(id);
+        if (subscriptionType.isPresent()) {
+            return subscriptionType.get();
+        }
+        throw new NotFoundException("SubscriptionType não encontrado!");
+    }
 }
