@@ -20,6 +20,8 @@ import com.cliente.ws.wsrasmooplus.dto.SubscriptionTypeDto;
 import com.cliente.ws.wsrasmooplus.model.SubscriptionType;
 import com.cliente.ws.wsrasmooplus.service.SubscriptionTypeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/subscription-Type")
 public class SusbcriptionTypeController {
@@ -39,12 +41,12 @@ public class SusbcriptionTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<SubscriptionType> create(@RequestBody SubscriptionTypeDto subscriptionTypeDto){
+    public ResponseEntity<SubscriptionType> create(@Valid @RequestBody SubscriptionTypeDto subscriptionTypeDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(subscriptionTypeService.create(subscriptionTypeDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SubscriptionType> update(@PathVariable("id") Long id,@RequestBody SubscriptionTypeDto subscriptionTypeDto){
+    public ResponseEntity<SubscriptionType> update(@PathVariable("id") Long id,@Valid @RequestBody SubscriptionTypeDto subscriptionTypeDto){
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.update(id,subscriptionTypeDto));
     }
 
