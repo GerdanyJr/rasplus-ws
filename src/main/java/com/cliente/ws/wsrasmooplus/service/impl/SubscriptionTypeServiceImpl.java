@@ -50,6 +50,9 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     @Override
     public SubscriptionType update(Long id,SubscriptionTypeDto dto) {
         getSubscriptiontype(id);
+        if(Objects.nonNull(dto.getId())){
+            throw new BadRequestException("Id deve ser nulo");
+        }
         return subscriptionTypeRepository.save(SubscriptionType.builder()
                 .id(id)
                 .name(dto.getName())

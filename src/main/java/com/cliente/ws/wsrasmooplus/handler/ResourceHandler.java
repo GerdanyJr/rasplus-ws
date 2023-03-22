@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.cliente.ws.wsrasmooplus.dto.error.ErrorResponseDto;
 import com.cliente.ws.wsrasmooplus.exception.BadRequestException;
 import com.cliente.ws.wsrasmooplus.exception.NotFoundException;
 
@@ -12,12 +13,20 @@ import com.cliente.ws.wsrasmooplus.exception.NotFoundException;
 public class ResourceHandler {
     
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> notFoundException(NotFoundException e){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); 
+    public ResponseEntity<ErrorResponseDto> notFoundException(NotFoundException e){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponseDto.builder()
+        .message(e.getMessage())
+        .httpStatus(HttpStatus.NOT_FOUND)
+        .code(HttpStatus.NOT_FOUND.value())
+        .build()); 
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<String> badRequestException(BadRequestException e){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    public ResponseEntity<ErrorResponseDto> badRequestException(BadRequestException e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto.builder()
+        .message(e.getMessage())
+        .httpStatus(HttpStatus.BAD_REQUEST)
+        .code(HttpStatus.BAD_REQUEST.value())
+        .build());
     }
 }
