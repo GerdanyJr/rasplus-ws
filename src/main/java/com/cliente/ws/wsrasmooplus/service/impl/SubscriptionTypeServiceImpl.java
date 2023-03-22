@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cliente.ws.wsrasmooplus.dto.SubscriptionTypeDto;
 import com.cliente.ws.wsrasmooplus.exception.BadRequestException;
 import com.cliente.ws.wsrasmooplus.exception.NotFoundException;
+import com.cliente.ws.wsrasmooplus.mapper.SubscriptionTypeMapper;
 import com.cliente.ws.wsrasmooplus.model.SubscriptionType;
 import com.cliente.ws.wsrasmooplus.repository.SubscriptionTypeRepository;
 import com.cliente.ws.wsrasmooplus.service.SubscriptionTypeService;
@@ -38,13 +39,7 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
         if (Objects.nonNull(dto.getId())) {
             throw new BadRequestException("Id deve ser nulo!");
         }
-        return subscriptionTypeRepository.save(SubscriptionType.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .accessMonth(dto.getAcessMonth())
-                .price(dto.getPrice())
-                .productKey(dto.getProductKey())
-                .build());
+        return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(dto));
     }
 
     @Override
@@ -53,13 +48,7 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
         if(Objects.nonNull(dto.getId())){
             throw new BadRequestException("Id deve ser nulo");
         }
-        return subscriptionTypeRepository.save(SubscriptionType.builder()
-                .id(id)
-                .name(dto.getName())
-                .accessMonth(dto.getAcessMonth())
-                .price(dto.getPrice())
-                .productKey(dto.getProductKey())
-                .build());
+        return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(dto));
     }
 
     @Override
