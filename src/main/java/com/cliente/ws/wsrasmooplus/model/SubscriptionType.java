@@ -3,6 +3,8 @@ package com.cliente.ws.wsrasmooplus.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,11 +12,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Table(name = "subscriptions_type")
 @Entity
-public class SubscriptionType implements Serializable {
+public class SubscriptionType extends RepresentationModel<SubscriptionType> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

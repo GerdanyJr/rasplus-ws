@@ -36,7 +36,7 @@ public class SusbcriptionTypeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SubscriptionType> findAll(@PathVariable Long id){
+    public ResponseEntity<SubscriptionType> findById(@PathVariable Long id){
             return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.findById(id));
     }
 

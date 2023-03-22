@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 
 import com.cliente.ws.wsrasmooplus.dto.SubscriptionTypeDto;
@@ -31,8 +32,13 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
 
     @Override
     public SubscriptionType findById(long id) {
-        return getSubscriptiontype(id);
-    }
+        return getSubscriptiontype(id).add(WebMvcLinkBuilder.linkTo(
+            WebMvcLinkBuilder.methodOn(com.cliente.ws.wsrasmooplus.controller.SusbcriptionTypeController.class).findById(id)).withSelfRel())
+            .add(WebMvcLinkBuilder.linkTo(
+            WebMvcLinkBuilder.methodOn(com.cliente.ws.wsrasmooplus.controller.SusbcriptionTypeController.class).update(id, new SubscriptionTypeDto())).withRel("update"))
+            .add(WebMvcLinkBuilder.linkTo(
+            WebMvcLinkBuilder.methodOn(com.cliente.ws.wsrasmooplus.controller.SusbcriptionTypeController.class).delete(id)).withRel("delete"));
+        }
 
     @Override
     public SubscriptionType create(SubscriptionTypeDto dto) {
