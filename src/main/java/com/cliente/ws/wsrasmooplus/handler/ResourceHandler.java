@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -50,5 +51,14 @@ public class ResourceHandler {
         .code(HttpStatus.BAD_REQUEST.value())
         .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponseDto);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponseDto> dataIntegrityViolationException(DataIntegrityViolationException d){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto.builder().
+        message(d.getMessage())
+        .httpStatus(HttpStatus.BAD_REQUEST)
+        .code(HttpStatus.BAD_REQUEST.value())
+        .build());
     }
 }

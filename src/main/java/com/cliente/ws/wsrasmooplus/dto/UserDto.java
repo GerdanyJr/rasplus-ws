@@ -28,9 +28,9 @@ public class UserDto {
     @CPF(message = "Inválido")
     private String cpf;
 
-    private LocalDate dtSubscription = LocalDate.now();
+    private LocalDate dtSubscription;
 
-    private LocalDate dtExpiration = LocalDate.now();
+    private LocalDate dtExpiration;
 
     @NotNull
     private Long userTypeId;
@@ -45,7 +45,7 @@ public class UserDto {
         this.phone = phone;
         this.cpf = cpf;
         this.dtSubscription = LocalDate.now();
-        this.dtExpiration = dtExpiration;
+        this.dtExpiration = LocalDate.now();
         this.userTypeId = userType;
         this.subscriptionTypeId = subscriptionType;
     }
